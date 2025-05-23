@@ -9,7 +9,8 @@ await context.overridePermissions("https://map.naver.com/", []);
 page.on("response", async (res)=>{
     const url = res.url();
     if(url.includes('/roadEvents/summary')){
-        console.log(res);
+        const data = await res.json();
+        console.log(data);
     }
 });
 
