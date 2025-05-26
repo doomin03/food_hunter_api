@@ -1,0 +1,23 @@
+{
+  "name": "food_hunter_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doomin03/food_hunter_api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doomin03/food_hunter_api/issues"
+  },
+  "homepage": "https://github.com/doomin03/food_hunter_api#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "puppeteer": "^24.9.0"
+  }
+}
