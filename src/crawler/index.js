@@ -6,13 +6,21 @@ const page = await browser.newPage();
 const context = browser.defaultBrowserContext();
 await context.overridePermissions("https://map.naver.com/", []);
 
+const point = []
+
 page.on("response", async (res)=>{
     const url = res.url();
-    if(url.includes('/roadEvents/summary')){
+    if(url.includes('/api/search/allSearch')){
         const data = await res.json();
-        console.log(data);
+        data.result.place.list.forEach((item)=>{
+            console.log(item.name);
+            console.log(item.x);
+            console.log(item.y);
+            console.log("__________")
+        })
     }
 });
+
 
 await page.goto("https://map.naver.com/")
 
