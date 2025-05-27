@@ -16,12 +16,20 @@ page.on("response", async (res)=>{
             console.log(item.name);
             console.log(item.x);
             console.log(item.y);
-            console.log("__________")
         })
     }
 });
 
 
-await page.goto("https://map.naver.com/")
+await page.goto("https://map.naver.com/");
+await page.waitForSelector('input[class = input_search]');
+
+
+const _searchInput = await page.$('input[class = input_search]');
+
+
+await page.type('input[class = input_search]', '서현 초밥');
+await page.keyboard.press('Enter');
+
 
 
