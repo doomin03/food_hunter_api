@@ -1,5 +1,6 @@
 import Response from "../../../crawler/event/response.js";
 import puppeteer from "puppeteer"
+import addPlace from "../model/search.model.js";
 
 class SearchNaverMap{
     constructor(){
@@ -28,13 +29,20 @@ class SearchNaverMap{
                 struct: 'result.place.list',
                 key: {
                     name : 'name',
+                    address : 'address',
+                    tel : "tel",
+                    id: 'id',
                     x : 'x',
                     y : 'y'
                 }
             });
-            event.parseIfMatch(res).then(data => {
-                if(data){
-                    console.log(data);
+            event.parseIfMatch(res).then(async dataList => {
+                if (Array.isArray(dataList)) {
+                    for (const data of dataList) {
+                        if (data?.id) {
+                            await addPlace(data.id, data);
+                        }
+                    }
                 }
             });
         })
