@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node src/v1/app.js",
     "start_crawler": "node src/v1/search/controller/search.controller.js"
   },
   "repository": {

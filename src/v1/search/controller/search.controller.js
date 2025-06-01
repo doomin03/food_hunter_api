@@ -22,7 +22,10 @@ class SearchNaverMap{
         return this;
     }
 
-    setEvent(){
+    /**
+     * @param {String} city
+     */
+    setEvent(city){
         this.page.on("response", async (res) => {
             let event = new Response({
                 url: '/api/search/allSearch',
@@ -40,7 +43,7 @@ class SearchNaverMap{
                 if (Array.isArray(dataList)) {
                     for (const data of dataList) {
                         if (data?.id) {
-                            await addPlace(data.id, data);
+                            await addPlace(city, data.id, data);
                         }
                     }
                 }
@@ -49,18 +52,16 @@ class SearchNaverMap{
 
         return this;
     }
-
+    /**
+     * @param {String} keyword
+     */
     async search(keyword){
         await this.page.goto("https://map.naver.com/");
         await this.page.waitForSelector('input[class = input_search]');
 
-        await this.page.type('input[class = input_search]', '서현 초밥');
+        await this.page.type('input[class = input_search]', keyword);
         await this.page.keyboard.press('Enter');
     }
 }
 
-(async () => {
-    const crawler = await new SearchNaverMap().init();
-    crawler.setEvent();
-    await crawler.search("서현 초밥");
-})();
+export default SearchNaverMap
