@@ -1,10 +1,8 @@
 class Response {
     /**
-     * @param {string} url
      * @param {Object} option - { struct: 'a.b.c', key: { title: 'x.y' } }
      */
-    constructor(url, option) {
-        this.url = url;
+    constructor( option) {
         this.option = option;
     }
 
@@ -13,10 +11,10 @@ class Response {
      * @param {Object} response - Puppeteer Response 객체
      * @returns {Promise<array|null>}
      */
-    parseIfMatch(response) {
+    async parseIfMatch(response) {
         const responseUrl = response.url();
-        if (responseUrl.includes(this.url)) {
-            return this.parseResponseData(response);
+        if (this.option?.url && responseUrl.includes(this.option.url)) {
+            return await this.parseResponseData(response);
         }
         return null;
     }
